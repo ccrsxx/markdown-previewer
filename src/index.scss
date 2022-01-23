@@ -1,0 +1,45 @@
+$font-size: 10px;
+$main-font: 'Fira Code', sans-serif;
+$backgroundBase: #619e9e;
+$dark-accent: #224b4b;
+$light-accent: #2cda9d;
+
+:root {
+  --font-size: #{$font-size};
+  --main-font: #{$main-font};
+  --background-base: #{$backgroundBase};
+  --dark-accent: #{$dark-accent};
+  --light-accent: #{$light-accent};
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  html {
+    font-size: 58%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+body {
+  font: 1.6rem/1.4 var(--main-font);
+  background: var(--background-base);
+  min-height: 100vh;
+}

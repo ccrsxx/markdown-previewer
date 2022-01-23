@@ -1,0 +1,36 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: lightgray;
+  margin: 1rem;
+  width: 50rem;
+}
+
+.toolbar {
+  width: 100%;
+  padding: 1rem;
+  background: teal;
+}
+
+.editor {
+  width: 80%;
+  height: 30rem;
+  margin: 2rem;
+  outline: 0;
+}
+
+.preview-wrapper {
+  @extend .editor-wrapper;
+}
+
+.preview {
+  @extend .editor;
+}
