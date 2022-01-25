@@ -2,11 +2,11 @@ import Prism from 'prismjs';
 import { Component } from 'react';
 import { marked } from 'marked';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFreeCodeCamp } from '@fortawesome/free-brands-svg-icons';
+import { faMarkdown } from '@fortawesome/free-brands-svg-icons';
 import {
   faCode,
-  faArrowsAlt,
-  faCompressAlt
+  faCompressAlt,
+  faExpandArrowsAlt
 } from '@fortawesome/free-solid-svg-icons';
 import './App.scss';
 
@@ -17,51 +17,93 @@ marked.setOptions({
   }
 });
 
+const renderer = new marked.Renderer();
+renderer.link = (href, title, text) =>
+  `<a target="_blank" href="${href}">${text}</a>`;
+
 interface AppProps {}
 
 interface AppStates {
-  input: string;
+  markdown: string;
+  editorMaximized: boolean;
+  previewMaximized: boolean;
 }
 
 class App extends Component<AppProps, AppStates> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      input: ''
+      markdown: '',
+      editorMaximized: false,
+      previewMaximized: false
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleEditorMaximized = this.handleEditorMaximized.bind(this);
+    this.handlePreviewMaximized = this.handlePreviewMaximized.bind(this);
   }
 
   handleChange(event: { target: { value: string } }) {
     this.setState({
-      input: event.target.value
+      markdown: event.target.value
     });
   }
 
+  handleEditorMaximized() {
+    this.setState((state) => ({
+      editorMaximized: !state.editorMaximized
+    }));
+  }
+
+  handlePreviewMaximized() {
+    this.setState((state) => ({
+      previewMaximized: !state.previewMaximized
+    }));
+  }
+
   render() {
-    const markdown = marked(this.state.input);
+    const styles = this.state.editorMaximized
+      ? {
+          editor: 'editor-wrapper maximized',
+          preview: 'preview-wrapper hide',
+          toggleIcon: faCompressAlt
+        }
+      : this.state.previewMaximized
+      ? {
+          editor: 'editor-wrapper hide',
+          preview: 'preview-wrapper maximized',
+          toggleIcon: faCompressAlt
+        }
+      : {
+          editor: 'editor-wrapper',
+          preview: 'preview-wrapper',
+          toggleIcon: faExpandArrowsAlt
+        };
+
+    console.log(styles);
 
     return (
       <div className='App'>
-        <div className='editor-wrapper'>
-          <div className='toolbar'>
-            <FontAwesomeIcon icon={faFreeCodeCamp} /> Editor
-            <FontAwesomeIcon icon={faArrowsAlt} />
-          </div>
+        <div className={styles.editor}>
+          <Toolbar
+            mainIcon={faCode}
+            toggleIcon={styles.toggleIcon}
+            text='Editor'
+            onClick={this.handleEditorMaximized}
+          />
           <textarea
             id='editor'
             className='editor'
             onChange={this.handleChange}
           ></textarea>
         </div>
-        <div className='preview-wrapper'>
-          <div className='toolbar'>
-            <FontAwesomeIcon icon={faCode} /> Preview
-            <FontAwesomeIcon icon={faCompressAlt} />
-          </div>
-          <div id='preview' className='preview'>
-            {markdown}
-          </div>
+        <div className={styles.preview}>
+          <Toolbar
+            mainIcon={faMarkdown}
+            toggleIcon={styles.toggleIcon}
+            text='Preview'
+            onClick={this.handlePreviewMaximized}
+          />
+          <Preview markdown={this.state.markdown} />
         </div>
       </div>
     );
@@ -70,8 +112,23 @@ class App extends Component<AppProps, AppStates> {
 
 const Toolbar = (props: any) => (
   <div className='toolbar'>
-    <FontAwesomeIcon icon={props.icon} /> Editor
+    <FontAwesomeIcon icon={props.mainIcon} className='main-icon' /> {props.text}
+    <FontAwesomeIcon
+      icon={props.toggleIcon}
+      className='toggle-icon'
+      onClick={props.onClick}
+    />
   </div>
+);
+
+const Preview = (props: any) => (
+  <div
+    id='preview'
+    className='preview'
+    dangerouslySetInnerHTML={{
+      __html: marked(props.markdown, { renderer: renderer })
+    }}
+  ></div>
 );
 
 export default App;
