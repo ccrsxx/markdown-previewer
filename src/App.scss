@@ -172,7 +172,7 @@
   }
 
   .preview-wrapper {
-    margin: 3rem !important;
+    margin: 3rem 0;
   }
 }
 
@@ -193,14 +193,19 @@
 
 .maximized {
   animation: fadeIn 300ms ease;
-  width: 80% !important;
+  width: 80%;
 }
 
 @media screen and (max-width: 700px) {
   .maximized {
-    width: 90% !important;
+    width: 90%;
     height: 80vh;
-    margin: 1rem !important;
+    margin: 1rem;
+
+    .editor,
+    .preview {
+      height: 100%;
+    }
   }
 }
 
