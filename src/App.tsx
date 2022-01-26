@@ -1,27 +1,13 @@
-import Prism from 'prismjs';
 import { Component } from 'react';
-import { marked } from 'marked';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMarkdown } from '@fortawesome/free-brands-svg-icons';
+import { Header, Toolbar, Editor, Preview } from './components';
 import {
   faCode,
+  faMarkdown,
   faCompressAlt,
-  faExpandArrowsAlt
-} from '@fortawesome/free-solid-svg-icons';
+  faExpandArrowsAlt,
+  placeholder
+} from './utils';
 import './App.scss';
-
-marked.setOptions({
-  breaks: true,
-  highlight(code) {
-    return Prism.highlight(code, Prism.languages.javascript, 'javascript');
-  }
-});
-
-const renderer = new marked.Renderer();
-renderer.link = (href, title, text) =>
-  `<a target="_blank" href="${href}">${text}</a>`;
-
-interface AppProps {}
 
 interface AppStates {
   markdown: string;
@@ -29,11 +15,11 @@ interface AppStates {
   previewMaximized: boolean;
 }
 
-class App extends Component<AppProps, AppStates> {
-  constructor(props: AppProps) {
+class App extends Component<{}, AppStates> {
+  constructor(props: {}) {
     super(props);
     this.state = {
-      markdown: '',
+      markdown: placeholder,
       editorMaximized: false,
       previewMaximized: false
     };
@@ -74,61 +60,37 @@ class App extends Component<AppProps, AppStates> {
           toggleIcon: faCompressAlt
         }
       : {
-          editor: 'editor-wrapper',
-          preview: 'preview-wrapper',
+          editor: 'editor-wrapper normal',
+          preview: 'preview-wrapper normal',
           toggleIcon: faExpandArrowsAlt
         };
 
-    console.log(styles);
-
     return (
       <div className='App'>
-        <div className={styles.editor}>
-          <Toolbar
-            mainIcon={faCode}
-            toggleIcon={styles.toggleIcon}
-            text='Editor'
-            onClick={this.handleEditorMaximized}
-          />
-          <textarea
-            id='editor'
-            className='editor'
-            onChange={this.handleChange}
-          ></textarea>
-        </div>
-        <div className={styles.preview}>
-          <Toolbar
-            mainIcon={faMarkdown}
-            toggleIcon={styles.toggleIcon}
-            text='Preview'
-            onClick={this.handlePreviewMaximized}
-          />
-          <Preview markdown={this.state.markdown} />
-        </div>
+        <Header />
+        <main className='main-container'>
+          <div className={styles.editor}>
+            <Toolbar
+              mainIcon={faCode}
+              toggleIcon={styles.toggleIcon}
+              text='Editor'
+              onClick={this.handleEditorMaximized}
+            />
+            <Editor value={this.state.markdown} onChange={this.handleChange} />
+          </div>
+          <div className={styles.preview}>
+            <Toolbar
+              mainIcon={faMarkdown}
+              toggleIcon={styles.toggleIcon}
+              text='Preview'
+              onClick={this.handlePreviewMaximized}
+            />
+            <Preview markdown={this.state.markdown} />
+          </div>
+        </main>
       </div>
     );
   }
 }
-
-const Toolbar = (props: any) => (
-  <div className='toolbar'>
-    <FontAwesomeIcon icon={props.mainIcon} className='main-icon' /> {props.text}
-    <FontAwesomeIcon
-      icon={props.toggleIcon}
-      className='toggle-icon'
-      onClick={props.onClick}
-    />
-  </div>
-);
-
-const Preview = (props: any) => (
-  <div
-    id='preview'
-    className='preview'
-    dangerouslySetInnerHTML={{
-      __html: marked(props.markdown, { renderer: renderer })
-    }}
-  ></div>
-);
 
 export default App;
