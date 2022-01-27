@@ -1,5 +1,5 @@
 $font-size: 10px;
-$main-font: 'Fira Code', sans-serif;
+$main-font: 'Fira Code', monospace;
 $border-radius: 4px;
 $backgroundBase: hsl(180, 24%, 62%);
 $dark-accent: hsl(180, 38%, 46%);
@@ -20,22 +20,16 @@ $light-accent: hsl(180, 24%, 80%);
 
 html {
   font-size: var(--font-size);
-}
 
-@media screen and (max-width: 1200px) {
-  html {
+  @media screen and (max-width: 1200px) {
     font-size: 60%;
   }
-}
 
-@media screen and (max-width: 980px) {
-  html {
+  @media screen and (max-width: 980px) {
     font-size: 58%;
   }
-}
 
-@media screen and (max-width: 480px) {
-  html {
+  @media screen and (max-width: 480px) {
     font-size: 55%;
   }
 }

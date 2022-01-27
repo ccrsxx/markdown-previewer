@@ -5,6 +5,7 @@ import {
   faMarkdown,
   faCompressAlt,
   faExpandArrowsAlt,
+  IconDefinition,
   placeholder
 } from './utils';
 import './App.scss';
@@ -47,41 +48,29 @@ class App extends Component<{}, AppStates> {
   }
 
   render() {
-    const styles = this.state.editorMaximized
-      ? {
-          editor: 'editor-wrapper maximized',
-          preview: 'preview-wrapper hide',
-          toggleIcon: faCompressAlt
-        }
+    const styles: [string, string, IconDefinition] = this.state.editorMaximized
+      ? ['editor-wrapper maximized', 'preview-wrapper hide', faCompressAlt]
       : this.state.previewMaximized
-      ? {
-          editor: 'editor-wrapper hide',
-          preview: 'preview-wrapper maximized',
-          toggleIcon: faCompressAlt
-        }
-      : {
-          editor: 'editor-wrapper normal',
-          preview: 'preview-wrapper normal',
-          toggleIcon: faExpandArrowsAlt
-        };
+      ? ['editor-wrapper hide', 'preview-wrapper maximized', faCompressAlt]
+      : ['editor-wrapper normal', 'preview-wrapper normal', faExpandArrowsAlt];
 
     return (
       <div className='App'>
         <Header />
         <main className='main-container'>
-          <div className={styles.editor}>
+          <div className={styles[0]}>
             <Toolbar
               mainIcon={faCode}
-              toggleIcon={styles.toggleIcon}
+              toggleIcon={styles[2]}
               text='Editor'
               onClick={this.handleEditorMaximized}
             />
             <Editor value={this.state.markdown} onChange={this.handleChange} />
           </div>
-          <div className={styles.preview}>
+          <div className={styles[1]}>
             <Toolbar
               mainIcon={faMarkdown}
-              toggleIcon={styles.toggleIcon}
+              toggleIcon={styles[2]}
               text='Preview'
               onClick={this.handlePreviewMaximized}
             />

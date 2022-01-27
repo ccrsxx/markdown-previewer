@@ -15,6 +15,10 @@
   span {
     font-size: 1.6rem;
     color: lightcyan;
+
+    @media screen and (max-width: 700px) {
+      display: block;
+    }
   }
 
   a {
@@ -31,16 +35,17 @@
 .main-container {
   display: flex;
   justify-content: center;
-}
 
-@media screen and (max-width: 700px) {
-  .main-container {
+  @media screen and (max-width: 700px) {
     flex-direction: column;
     align-items: center;
   }
+}
 
-  h1 > span {
-    display: block;
+@mixin editor-preview-wrapper {
+  @media screen and (max-width: 700px) {
+    width: 80vw;
+    height: 40vh;
   }
 }
 
@@ -50,6 +55,8 @@
   height: 85vh;
   margin: 1rem;
   border-radius: var(--border-radius);
+
+  @include editor-preview-wrapper();
 
   .toolbar {
     display: flex;
@@ -98,13 +105,17 @@
   width: 70rem;
   margin-left: 4rem;
 
+  @include editor-preview-wrapper();
+
+  @media screen and (max-width: 700px) {
+    margin: 3rem 0;
+  }
+
   .preview {
+    @extend .editor;
     overflow: auto;
-    height: 94%;
     padding: 0 1rem;
-    font-size: 1.8rem;
     background: inherit;
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
 
     blockquote {
       border-left: 3px solid #224b4b;
@@ -164,18 +175,6 @@
   }
 }
 
-@media screen and (max-width: 700px) {
-  .editor-wrapper,
-  .preview-wrapper {
-    width: 80vw;
-    height: 40vh;
-  }
-
-  .preview-wrapper {
-    margin: 3rem 0;
-  }
-}
-
 .normal {
   animation: fadeOut 300ms ease;
 }
@@ -194,10 +193,8 @@
 .maximized {
   animation: fadeIn 300ms ease;
   width: 80%;
-}
 
-@media screen and (max-width: 700px) {
-  .maximized {
+  @media screen and (max-width: 700px) {
     width: 90%;
     height: 80vh;
     margin: 1rem;
