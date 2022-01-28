@@ -16,7 +16,7 @@ interface AppStates {
   previewMaximized: boolean;
 }
 
-class App extends Component<{}, AppStates> {
+class MarkdownPreviewer extends Component<{}, AppStates> {
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -82,4 +82,4 @@ class App extends Component<{}, AppStates> {
   }
 }
 
-export default App;
+export default MarkdownPreviewer;

@@ -1,4 +1,5 @@
-import { marked, renderer, prism } from '../utils';
+import prism from 'prismjs';
+import { marked, renderer } from '../utils';
 
 interface PreviewProps {
   markdown: string;
