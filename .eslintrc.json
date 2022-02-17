@@ -45,7 +45,7 @@
     "react/jsx-no-bind": [
       "error",
       {
-        "allowFunctions": true
+        "allowArrowFunctions": true
       }
     ],
     "implicit-arrow-linebreak": "off"

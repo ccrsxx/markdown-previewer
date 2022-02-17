@@ -14,19 +14,19 @@ export default function App() {
   const [editorMaximized, setEditorMaximized] = useState(false);
   const [previewMaximized, setPreviewMaximized] = useState(false);
 
-  function handleChange({
+  const handleChange = ({
     target: { value }
-  }: React.ChangeEvent<HTMLTextAreaElement>) {
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMarkdown(value);
-  }
+  };
 
-  function handleEditorMaximized() {
+  const handleEditorMaximized = () => {
     setEditorMaximized((state) => !state);
-  }
+  };
 
-  function handlePreviewMaximized() {
+  const handlePreviewMaximized = () => {
     setPreviewMaximized((state) => !state);
-  }
+  };
 
   const styles: [string, string, IconDefinition] = editorMaximized
     ? ['editor-wrapper maximized', 'preview-wrapper hide', faCompressAlt]
