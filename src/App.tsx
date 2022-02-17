@@ -21,11 +21,11 @@ export default function App() {
   };
 
   const handleEditorMaximized = () => {
-    setEditorMaximized((state) => !state);
+    setEditorMaximized((prevStatus) => !prevStatus);
   };
 
   const handlePreviewMaximized = () => {
-    setPreviewMaximized((state) => !state);
+    setPreviewMaximized((prevStatus) => !prevStatus);
   };
 
   const styles: [string, string, IconDefinition] = editorMaximized
