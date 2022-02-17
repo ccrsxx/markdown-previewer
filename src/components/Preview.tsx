@@ -15,7 +15,6 @@ marked.setOptions({
 export function Preview({ markdown }: PreviewProps) {
   return (
     <div
-      id='preview'
       className='preview'
       dangerouslySetInnerHTML={{
         __html: marked(markdown, { renderer })
