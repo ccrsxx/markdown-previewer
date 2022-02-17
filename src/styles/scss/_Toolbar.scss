@@ -1,0 +1,28 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  padding: 1rem;
+  background: var(--dark-accent);
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+
+  .main-icon,
+  .toggle-icon {
+    color: mediumspringgreen;
+  }
+
+  .main-icon {
+    margin-right: 1rem;
+  }
+
+  .toggle-icon {
+    cursor: pointer;
+    margin-left: auto;
+    transition: color 100 ease-out;
+  }
+
+  .toggle-icon:hover {
+    color: whitesmoke;
+  }
+}

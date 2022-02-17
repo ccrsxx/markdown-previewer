@@ -1,4 +1,4 @@
-export { Header } from './header';
-export { Toolbar } from './toolbar';
-export { Editor } from './editor';
-export { Preview } from './preview';
+export * from './Header';
+export * from './Toolbar';
+export * from './Editor';
+export * from './Preview';

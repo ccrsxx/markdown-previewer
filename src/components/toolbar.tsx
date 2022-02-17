@@ -7,13 +7,15 @@ interface ToolbarProps {
   onClick: CallbackFunction;
 }
 
-export const Toolbar = (props: ToolbarProps) => (
-  <div className='toolbar'>
-    <FontAwesomeIcon icon={props.mainIcon} className='main-icon' /> {props.text}
-    <FontAwesomeIcon
-      icon={props.toggleIcon}
-      className='toggle-icon'
-      onClick={props.onClick}
-    />
-  </div>
-);
+export function Toolbar({ mainIcon, toggleIcon, text, onClick }: ToolbarProps) {
+  return (
+    <div className='toolbar'>
+      <FontAwesomeIcon icon={mainIcon} className='main-icon' /> {text}
+      <FontAwesomeIcon
+        icon={toggleIcon}
+        className='toggle-icon'
+        onClick={onClick}
+      />
+    </div>
+  );
+}

@@ -12,12 +12,14 @@ marked.setOptions({
   }
 });
 
-export const Preview = (props: PreviewProps) => (
-  <div
-    id='preview'
-    className='preview'
-    dangerouslySetInnerHTML={{
-      __html: marked(props.markdown, { renderer: renderer })
-    }}
-  ></div>
-);
+export function Preview({ markdown }: PreviewProps) {
+  return (
+    <div
+      id='preview'
+      className='preview'
+      dangerouslySetInnerHTML={{
+        __html: marked(markdown, { renderer })
+      }}
+    />
+  );
+}

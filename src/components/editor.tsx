@@ -5,11 +5,13 @@ interface EditorProps {
   onChange: CallbackFunctionVariadic;
 }
 
-export const Editor = (props: EditorProps) => (
-  <textarea
-    id='editor'
-    className='editor'
-    value={props.value}
-    onChange={props.onChange}
-  ></textarea>
-);
+export function Editor({ value, onChange }: EditorProps) {
+  return (
+    <textarea
+      id='editor'
+      className='editor'
+      value={value}
+      onChange={onChange}
+    />
+  );
+}

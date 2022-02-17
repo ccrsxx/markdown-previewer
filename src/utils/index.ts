@@ -1,4 +1,4 @@
 export * from './renderer';
 export * from './placeholder';
-export * from './icon';
-export * from './type';
+export * from './icons';
+export * from './types';

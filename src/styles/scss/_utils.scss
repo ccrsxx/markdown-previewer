@@ -1,0 +1,52 @@
+@mixin editor-preview-wrapper {
+  @media screen and (max-width: 700px) {
+    width: 80vw;
+    height: 40vh;
+  }
+}
+
+.normal {
+  animation: fadeOut 300ms ease;
+
+  @keyframes fadeOut {
+    from {
+      transform: translateX(-250px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+.maximized {
+  animation: fadeIn 300ms ease;
+  width: 80% !important;
+
+  @keyframes fadeIn {
+    from {
+      transform: translateX(250px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 90% !important;
+    height: 80vh !important;
+    margin: 1rem !important;
+
+    .editor,
+    .preview {
+      height: 100% !important;
+    }
+  }
+}
+
+.hide {
+  display: none;
+}
